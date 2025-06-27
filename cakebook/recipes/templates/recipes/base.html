@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CakeBook</title>
+    <link rel="stylesheet" href="{% static 'recipes/styles.css' %}">
+</head>
+<body>
+    <div class="navbar">
+    🍰 CakeBook
+    <div style="float: right; font-size: 1rem; margin-top: 5px;">
+        {% if user.is_authenticated %}
+            Hello, {{ user.username }} | 
+            <a href="{% url 'logout' %}" style="color: white; text-decoration: underline;">Logout</a>
+            <a href="{% url 'add_recipe' %}" class="add-link">➕ Add Recipe</a>
+        {% else %}
+            <a href="{% url 'login' %}" style="color: white; text-decoration: underline;">Login</a> |
+            <a href="{% url 'register' %}" style="color: white; text-decoration: underline;">Register</a>
+        {% endif %}
+    </div>
+</div>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    {% if messages %}
+<script>
+    {% for message in messages %}
+        alert("{{ message|escapejs }}");
+    {% endfor %}
+</script>
+{% endif %}
+
+</body>
+</html>

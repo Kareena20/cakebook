@@ -1,0 +1,31 @@
+{% extends 'recipes/base.html' %}
+{% block content %}
+<div class="login-wrapper">
+    <div class="login-card">
+        <h2 class="login-heading">🍰 Welcome Back to <span style="color: #d63384;">CakeBook</span></h2>
+
+        <form method="post" class="login-form">
+            {% csrf_token %}
+            {% if form.errors %}
+                <p class="login-error">⚠️ Invalid username or password.</p>
+            {% endif %}
+
+            <div class="login-field">
+                <label for="id_username">Username</label>
+                <input type="text" name="username" id="id_username" required class="login-input">
+            </div>
+
+            <div class="login-field">
+                <label for="id_password">Password</label>
+                <input type="password" name="password" id="id_password" required class="login-input">
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <p class="login-switch">
+            🍩 Don’t have an account? <a href="{% url 'register' %}">Register here</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

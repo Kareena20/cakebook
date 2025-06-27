@@ -1,0 +1,32 @@
+{% extends 'recipes/base.html' %}
+{% block content %}
+<div class="detail-container">
+    {% if recipe.image %}
+        <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" class="detail-img">
+    {% endif %}
+
+    <div class="detail-text">
+        <h1>{{ recipe.title }}</h1>
+
+        <h3>🧁 Ingredients</h3>
+        <ul class="list">
+            {% for line in recipe.ingredients.splitlines %}
+                {% if line %}
+                <li>{{ line }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+        <h3>🎂 Instructions</h3>
+        <ol class="list">
+            {% for step in recipe.instructions.splitlines %}
+                {% if step %}
+                <li>{{ step }}</li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+
+        <a href="/" class="back-btn">← Back to all recipes</a>
+    </div>
+</div>
+{% endblock %}
